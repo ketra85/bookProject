@@ -7,7 +7,7 @@ import { TypesModule } from './types/types.module';
 import { OrdersModule } from './orders/orders.module';
 import { UsersModule } from './users/users.module';
 import { RolesModule } from './roles/roles.module';
-import { PermissionsModule } from './permissions/permissions.module';
+// import { PermissionsModule } from './permissions/permissions.module';
 import { AuthModule } from './auth/auth.module';
 
 @Module({
@@ -29,7 +29,7 @@ import { AuthModule } from './auth/auth.module';
     OrdersModule,
     UsersModule,
     RolesModule,
-    PermissionsModule,
+    // PermissionsModule,
     AuthModule,
   ],
 })

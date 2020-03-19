@@ -1,3 +1,6 @@
+import { Order } from "src/orders/order.entity";
+import { Role } from "src/roles/role.entity";
+
 export class CreateUserDto {
     userId: number;
 
@@ -10,6 +13,10 @@ export class CreateUserDto {
     lastName: string;
 
     email: string;
+
+    orders: Order[];
+
+    role: Role;
 
     createdAt: Date;
 }

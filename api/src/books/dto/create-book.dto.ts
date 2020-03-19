@@ -1,3 +1,7 @@
+import { Author } from '../../authors/author.entity';
+import { Genre } from '../../genres/genre.entity';
+import { Type } from 'src/types/type.entity';
+
 export class CreateBookDto {
     bookId: number;
 
@@ -8,10 +12,14 @@ export class CreateBookDto {
     publisherId: number;
 
     publishedYear: Date;
-    
-    typeId: number;
-    
+
+    authors: Author[];
+        
     pages: number;
+
+    genres: Genre[];
+
+    type: Type;
     
     price: number;
     

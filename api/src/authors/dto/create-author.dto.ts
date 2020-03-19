@@ -1,3 +1,5 @@
+import { Book } from "src/books/book.entity";
+
 export class CreateAuthorDto {
     authorId: number;
 
@@ -6,4 +8,6 @@ export class CreateAuthorDto {
     lastName: string;
     
     email: string;
+
+    books: Book[];
 }

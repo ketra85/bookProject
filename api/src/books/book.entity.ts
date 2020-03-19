@@ -1,4 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'; 
+import { Column, Entity, PrimaryGeneratedColumn, JoinTable, ManyToMany, OneToOne } from 'typeorm'; 
+import { Author } from '../authors/author.entity';
+import { Genre } from '../genres/genre.entity';
+import { Type } from '../types/type.entity';
+import { Order } from '../orders/order.entity';
 
 @Entity()
 export class Book {
@@ -18,9 +22,6 @@ export class Book {
     publishedYear: Date;
     
     @Column()
-    typeId: number;
-    
-    @Column()
     pages: number;
     
     @Column()
@@ -31,4 +32,19 @@ export class Book {
     
     @Column()
     createdAt: Date;
+
+    @ManyToMany(type => Author)
+    @JoinTable()
+    authors: Author[];
+
+    @ManyToMany(type => Genre)
+    @JoinTable()
+    genres: Genre[];
+
+    @OneToOne(type => Type)
+    type: Type;
+
+    @ManyToMany(type => Order)
+    @JoinTable()
+    orders: Order[];
 }

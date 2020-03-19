@@ -1,5 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'; 
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, OneToOne } from 'typeorm'; 
+import { Order } from '../orders/order.entity';
+import { Role } from '../roles/role.entity';
 
+// Verify whether you want permissions or not
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
@@ -22,4 +25,10 @@ export class User {
 
     @Column()
     createdAt: Date;
+
+    @OneToMany(type => Order, order => order.user)
+    orders: Order[];
+
+    @OneToOne(type => Role)
+    role: Role;
 }
