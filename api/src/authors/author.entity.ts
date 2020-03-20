@@ -13,7 +13,7 @@ export class Author {
     lastName: string;
     
     @Column()
-    email: number;
+    email: string;
 
     @ManyToMany(type => Book)
     @JoinTable()

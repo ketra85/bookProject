@@ -11,9 +11,9 @@ export class AuthorsService {
         private readonly authorsRepository: Repository<Author>,
     ) {}
 
-    create(createBookDto: CreateAuthorDto): Promise<Author> {
+    create(createAuthorDto: CreateAuthorDto): Promise<Author> {
         const author = new Author();
-        author.authorId = createBookDto.authorId;
+        author.authorId = createAuthorDto.authorId;
 
         return this.authorsRepository.save(author);
     }

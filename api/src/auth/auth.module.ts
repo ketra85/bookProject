@@ -6,10 +6,13 @@ import { AuthService } from './auth.service';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './strategies/jwt.strategy';
 import { LocalStrategy } from "./strategies/local.strategy";
+import { AuthController } from './auth.controller';
+import { RolesModule } from 'src/roles/roles.module';
 
 @Module({
     imports: [
         UsersModule,
+        RolesModule,
         PassportModule,
         JwtModule.register({
             secret: jwtConstants.secret,
@@ -17,7 +20,7 @@ import { LocalStrategy } from "./strategies/local.strategy";
         }),
     ],
     providers: [AuthService, LocalStrategy, JwtStrategy],
-    exports: [AuthService],
+    controllers: [AuthController]
 })
 
 export class AuthModule {}
