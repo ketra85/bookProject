@@ -14,12 +14,15 @@ const auth_service_1 = require("./auth.service");
 const constants_1 = require("./constants");
 const jwt_strategy_1 = require("./strategies/jwt.strategy");
 const local_strategy_1 = require("./strategies/local.strategy");
+const auth_controller_1 = require("./auth.controller");
+const roles_module_1 = require("../roles/roles.module");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
     common_1.Module({
         imports: [
             users_module_1.UsersModule,
+            roles_module_1.RolesModule,
             passport_1.PassportModule,
             jwt_1.JwtModule.register({
                 secret: constants_1.jwtConstants.secret,
@@ -27,7 +30,7 @@ AuthModule = __decorate([
             }),
         ],
         providers: [auth_service_1.AuthService, local_strategy_1.LocalStrategy, jwt_strategy_1.JwtStrategy],
-        exports: [auth_service_1.AuthService],
+        controllers: [auth_controller_1.AuthController]
     })
 ], AuthModule);
 exports.AuthModule = AuthModule;

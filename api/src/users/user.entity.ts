@@ -1,6 +1,7 @@
-import { Column, Entity, PrimaryGeneratedColumn, OneToMany, OneToOne } from 'typeorm'; 
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany, OneToOne, JoinTable, JoinColumn } from 'typeorm'; 
 import { Order } from '../orders/order.entity';
 import { Role } from '../roles/role.entity';
+import {Contains, Length, IsEmail, IsDate, Min, Max} from "class-validator";
 
 // Verify whether you want permissions or not
 @Entity()
@@ -9,26 +10,30 @@ export class User {
     userId: number;
 
     @Column()
-    userName: string;
-
-    @Column()
-    password: string;
-
-    @Column()
-    firstName: string;
-
-    @Column()
-    lastName: string;
-
-    @Column()
+    @IsEmail()
     email: string;
 
     @Column()
-    createdAt: Date;
+    @Min(8)
+    @Max(32)
+    password: string;
 
+    @Column()
+    @Length(100)
+    firstName: string;
+
+    @Column()
+    @Length(100)
+    lastName: string;
+
+    @Column()
+    @IsDate()
+    createdAt: Date;
+    
     @OneToMany(type => Order, order => order.user)
     orders: Order[];
 
-    @OneToOne(type => Role)
+    @OneToOne(type => Role, role => role.user)
+    @JoinColumn()
     role: Role;
 }

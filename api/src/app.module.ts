@@ -7,6 +7,8 @@ import { GenresModule } from './genres/genres.module';
 import { TypesModule } from './types/types.module';
 import { OrdersModule } from './orders/orders.module';
 import { AuthModule } from './auth/auth.module';
+import { WinstonModule, utilities as nestWinstonModuleUtilities } from 'nest-winston';
+import * as winston from 'winston';
 
 @Module({
   imports: [
@@ -27,7 +29,17 @@ import { AuthModule } from './auth/auth.module';
     TypesModule,
     OrdersModule,
     AuthModule,
-  ],
+    WinstonModule.forRoot({
+      transports: [
+        new winston.transports.Console({
+          format: winston.format.combine(
+            winston.format.timestamp(),
+            nestWinstonModuleUtilities.format.nestLike(),
+          ),
+        })
+      ]
+    }),
+  ]
 })
 
 export class AppModule {}

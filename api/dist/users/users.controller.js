@@ -15,11 +15,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("./users.service");
 const create_user_dto_1 = require("./dto/create-user.dto");
+const core_1 = require("@nestjs/core");
 let UsersController = class UsersController {
-    constructor(usersService) {
+    constructor(usersService, request) {
         this.usersService = usersService;
+        this.request = request;
     }
     create(createUserDto) {
+        console.log(this.request.body);
         return this.usersService.create(createUserDto);
     }
     findAll() {
@@ -61,7 +64,9 @@ __decorate([
 ], UsersController.prototype, "remove", null);
 UsersController = __decorate([
     common_1.Controller('users'),
-    __metadata("design:paramtypes", [users_service_1.UsersService])
+    common_1.Injectable({ scope: common_1.Scope.REQUEST }),
+    __param(1, common_1.Inject(core_1.REQUEST)),
+    __metadata("design:paramtypes", [users_service_1.UsersService, Object])
 ], UsersController);
 exports.UsersController = UsersController;
 //# sourceMappingURL=users.controller.js.map

@@ -1,20 +1,15 @@
-import { Order } from "src/orders/order.entity";
 import { Role } from "src/roles/role.entity";
 
 export class CreateUserDto {
-    userId: number;
+    // userId: number;
 
-    userName: string;
+    email: string;
 
     password: string;
 
     firstName: string;
 
     lastName: string;
-
-    email: string;
-
-    orders: Order[];
 
     role: Role;
 

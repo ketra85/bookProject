@@ -22,7 +22,11 @@ let UsersService = class UsersService {
     }
     create(createUserDto) {
         const user = new user_entity_1.User();
-        user.userId = createUserDto.userId;
+        user.email = createUserDto.email;
+        user.password = createUserDto.password;
+        user.firstName = createUserDto.firstName;
+        user.lastName = createUserDto.lastName;
+        user.createdAt = createUserDto.createdAt;
         return this.usersRepository.save(user);
     }
     async findAll() {

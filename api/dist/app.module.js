@@ -14,8 +14,9 @@ const publishers_module_1 = require("./publishers/publishers.module");
 const genres_module_1 = require("./genres/genres.module");
 const types_module_1 = require("./types/types.module");
 const orders_module_1 = require("./orders/orders.module");
-const roles_module_1 = require("./roles/roles.module");
 const auth_module_1 = require("./auth/auth.module");
+const nest_winston_1 = require("nest-winston");
+const winston = require("winston");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -37,9 +38,15 @@ AppModule = __decorate([
             genres_module_1.GenresModule,
             types_module_1.TypesModule,
             orders_module_1.OrdersModule,
-            roles_module_1.RolesModule,
             auth_module_1.AuthModule,
-        ],
+            nest_winston_1.WinstonModule.forRoot({
+                transports: [
+                    new winston.transports.Console({
+                        format: winston.format.combine(winston.format.timestamp(), nest_winston_1.utilities.format.nestLike()),
+                    })
+                ]
+            }),
+        ]
     })
 ], AppModule);
 exports.AppModule = AppModule;

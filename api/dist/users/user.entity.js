@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const order_entity_1 = require("../orders/order.entity");
 const role_entity_1 = require("../roles/role.entity");
+const class_validator_1 = require("class-validator");
 let User = class User {
 };
 __decorate([
@@ -20,26 +21,28 @@ __decorate([
 ], User.prototype, "userId", void 0);
 __decorate([
     typeorm_1.Column(),
-    __metadata("design:type", String)
-], User.prototype, "userName", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], User.prototype, "password", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], User.prototype, "firstName", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], User.prototype, "lastName", void 0);
-__decorate([
-    typeorm_1.Column(),
+    class_validator_1.IsEmail(),
     __metadata("design:type", String)
 ], User.prototype, "email", void 0);
 __decorate([
     typeorm_1.Column(),
+    class_validator_1.Min(8),
+    class_validator_1.Max(32),
+    __metadata("design:type", String)
+], User.prototype, "password", void 0);
+__decorate([
+    typeorm_1.Column(),
+    class_validator_1.Length(100),
+    __metadata("design:type", String)
+], User.prototype, "firstName", void 0);
+__decorate([
+    typeorm_1.Column(),
+    class_validator_1.Length(100),
+    __metadata("design:type", String)
+], User.prototype, "lastName", void 0);
+__decorate([
+    typeorm_1.Column(),
+    class_validator_1.IsDate(),
     __metadata("design:type", Date)
 ], User.prototype, "createdAt", void 0);
 __decorate([
@@ -47,7 +50,8 @@ __decorate([
     __metadata("design:type", Array)
 ], User.prototype, "orders", void 0);
 __decorate([
-    typeorm_1.OneToOne(type => role_entity_1.Role),
+    typeorm_1.OneToOne(type => role_entity_1.Role, role => role.user),
+    typeorm_1.JoinColumn(),
     __metadata("design:type", role_entity_1.Role)
 ], User.prototype, "role", void 0);
 User = __decorate([
